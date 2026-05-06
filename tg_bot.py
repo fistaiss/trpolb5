@@ -2,10 +2,10 @@ import telebot
 import logging
 from datetime import datetime
 
-# Настройка логирования, чтобы видеть работу бота в консоли
+# Настройка логирования
 logging.basicConfig(level=logging.INFO)
 
-# Вставь сюда свой токен, который получил у @BotFather
+# Вставь сюда свой токен
 TOKEN = 'ТВОЙ_ТОКЕН_ЗДЕСЬ'
 bot = telebot.TeleBot(TOKEN)
 
@@ -21,7 +21,7 @@ def send_welcome(message):
     bot.reply_to(message, welcome_text)
     logging.info(f"Пользователь {user_name} запустил бота")
 
-# 2. Обработка команды /help (ту самую, что просит препод в PR)
+# 2. Обработка команды /help
 @bot.message_handler(commands=['help'])
 def help_command(message):
     help_text = (
@@ -39,7 +39,7 @@ def show_time(message):
     now = datetime.now().strftime("%H:%M:%S")
     bot.reply_to(message, f"Текущее время: {now} ⏰")
 
-# 4. Дополнительная функция: Статус (для солидности)
+# 4. Дополнительная функция: Статус
 @bot.message_handler(commands=['status'])
 def check_status(message):
     status_report = (
@@ -51,7 +51,7 @@ def check_status(message):
     )
     bot.send_message(message.chat.id, status_report, parse_mode='Markdown')
 
-# 5. Эхо-ответ на любое текстовое сообщение
+# 5. Эхо-ответ
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     bot.reply_to(message, f"Ты написал: '{message.text}'. Я пока только учусь!")
